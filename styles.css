@@ -38,6 +38,7 @@ section {
 }
 section:has(noscript) {
     height: 0dvh;
+    text-align: center;
 }
 /* Navbar Item Container */
 nav {
@@ -190,9 +191,7 @@ footer {
 #projects {
     
     div {
-        
         width: 95%;
-        
     }
 
     div:hover{
