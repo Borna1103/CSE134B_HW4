@@ -42,9 +42,6 @@
                     </a>
                 </li>
             
-                <li id="theme-toggle" style="margin-left: 10px;">
-                    <button id="toggle-button">🌞</button>
-                </li>
             </ul>
         </nav>
     </header>
@@ -167,19 +164,21 @@
 
         .info-message {
             color: green;
-            
+            display: none; /* Initially hidden */
         }
+
         input:user-valid, textarea:user-valid {
             border-color: green;
         }
         input:user-invalid, textarea:user-invalid {
             border-color: red;
         }
-        
 
         input, textarea {
+            
             color: black;
             width: 100%;
+           
             padding: 8px;
             border: 1px solid #ccc;
             border-radius: 5px;
@@ -204,17 +203,6 @@
             border-radius: 5px;
             cursor: pointer;
         }
-        .warning {
-            color: orange;
-        }
-        .error {
-            color: red;
-            animation: flash 0.5s;
-        }
-        @keyframes flash {
-            0%, 100% { background-color: white; }
-            50% { background-color: #ffdddd; }
-        }
     </style>
     <footer>
         
@@ -222,95 +210,29 @@
         
         <div id="contact">
             <h2>Contact Me</h2>
-            <form action="https://httpbin.org/post" method="post" id="contact-form">
+            <form action="https://httpbin.org/post" method="post">
                 <fieldset>
                 <legend>Send me a message!</legend>
                 <label for="name">Name:</label>
-                <input type="text" id="name" name="name" pattern="([A-Za-z\s]*)+$" required>
+                <input type="text" id="name" name="name" pattern="[A-Za-z\s]+" required>
                 <output class="error-message" id="name-error">Name is required.</output>
                 <output class="info-message" id="name-info">Please enter your full name.</output>
                 <br>
                 <label for="email">Email:</label>
-                <input type="email" id="email" name="email" pattern="^([A-Za-z0-9@.\s]*)$"required>
+                <input type="email" id="email" name="email" required>
                 <output class="error-message" id="email-error">Valid email is required.</output>
                 <output class="info-message" id="email-info">We will not share your email.</output>
                 <br>
                 <label for="message">Comments:</label>
-                <textarea id="message" name="message" required minlength="5" maxlength="200" pattern="^([A-Za-z0-9 .,!?'-]*)+$"></textarea>
+                <textarea id="message" name="message" required minlength="10" maxlength="500" pattern="^[A-Za-z0-9 .,!?'-]+$"></textarea>
                 <output class="error-message" id="message-error"></output>
                 <output class="info-message" id="message-info">Maximum 500 characters remaining.</output>
                 <br>
                 <input type="hidden" name="possible_bot" value="">
-                <input type="hidden" name="form-errors" id="form-errors">
                 <button type="submit">Send</button>
                 </fieldset>
             </form>
         </div>
-        <script>
-            const form = document.getElementById("contact-form");
-            const formErrors = [];
-    
-            // Validate form fields
-            function validateField(field, regex, errorMessage) {
-                field.addEventListener("input", (e) => {
-                    if (!regex.test(field.value)) {
-                        field.classList.add("error");
-                        document.getElementById(field.id + "-error").textContent = errorMessage;
-                        document.getElementById(field.id + "-error").style.display = "block";
-                        formErrors.push({ field: field.name, message: errorMessage, value: field.value });
-                        setTimeout(() => {
-                            document.getElementById(field.id + "-error").style.display = "none";
-                        }, 2000);
-                        e.preventDefault();
-                    } else {
-                        field.classList.remove("error");
-                        document.getElementById(field.id + "-error").style.display = "none";
-                    }
-                });
-            }
-    
-            validateField(document.getElementById("name"), /^([A-Za-z\s]*)$/, "Only letters and spaces allowed.");
-            validateField(document.getElementById("message"), /^([A-Za-z0-9 .,!?'-]*)+$/, "Only standard characters allowed.");
-            validateField(document.getElementById("email"), /^([A-Za-z0-9@.\s]*)$/, "Please enter in a valid email.");
-            
-            // Message field character count
-            const messageField = document.getElementById("message");
-            const messageInfo = document.getElementById("message-info");
-            messageField.addEventListener("input", () => {
-                const remaining = 200 - messageField.value.length;
-                messageInfo.textContent = `Maximum ${remaining} characters remaining.`;
-                
-                if (remaining < 50) {
-                    messageInfo.classList.add("warning");
-                } else {
-                    messageInfo.classList.remove("warning");
-                }
-            });
-    
-            // Form errors
-            form.addEventListener("submit", (event) => {
-                document.getElementById("form-errors").value = JSON.stringify(formErrors);
-                if (!form.checkValidity()) {
-                    event.preventDefault();
-                    alert("Please fix errors before submitting.");
-                }
-            });
-
-            // Theme toggle
-            document.addEventListener("DOMContentLoaded", () => {
-                const toggleButton = document.getElementById("toggle-button");
-                const currentTheme = localStorage.getItem("theme") || "light";
-                document.documentElement.setAttribute("data-theme", currentTheme);
-                toggleButton.textContent = currentTheme === "dark" ? "🌜" : "🌞";
-
-                toggleButton.addEventListener("click", () => {
-                    const newTheme = document.documentElement.getAttribute("data-theme") === "light" ? "dark" : "light";
-                    document.documentElement.setAttribute("data-theme", newTheme);
-                    localStorage.setItem("theme", newTheme);
-                    toggleButton.textContent = newTheme === "dark" ? "🌜" : "🌞";
-                });
-            });
-        </script>
         <div>
             <address>
                 <p>Contact: <a href="mailto:hemmatyborna@gmail.com">hemmatyborna@gmail.com</a></p>

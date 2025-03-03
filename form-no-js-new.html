@@ -42,9 +42,7 @@
                     </a>
                 </li>
             
-                <li id="theme-toggle" style="margin-left: 10px;">
-                    <button id="toggle-button">🌞</button>
-                </li>
+                
             </ul>
         </nav>
     </header>
@@ -169,6 +167,7 @@
             color: green;
             
         }
+        
         input:user-valid, textarea:user-valid {
             border-color: green;
         }
@@ -296,20 +295,8 @@
                 }
             });
 
-            // Theme toggle
-            document.addEventListener("DOMContentLoaded", () => {
-                const toggleButton = document.getElementById("toggle-button");
-                const currentTheme = localStorage.getItem("theme") || "light";
-                document.documentElement.setAttribute("data-theme", currentTheme);
-                toggleButton.textContent = currentTheme === "dark" ? "🌜" : "🌞";
-
-                toggleButton.addEventListener("click", () => {
-                    const newTheme = document.documentElement.getAttribute("data-theme") === "light" ? "dark" : "light";
-                    document.documentElement.setAttribute("data-theme", newTheme);
-                    localStorage.setItem("theme", newTheme);
-                    toggleButton.textContent = newTheme === "dark" ? "🌜" : "🌞";
-                });
-            });
+        
+        
         </script>
         <div>
             <address>

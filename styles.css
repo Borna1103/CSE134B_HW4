@@ -1,4 +1,11 @@
 :root {
+    --secondary-color: rgba(42, 59, 87, 0.911);
+    --gradient-start-color: rgb(62, 202, 191);
+    --gradient-end-color: rgb(52,211,153);
+    --primary-color: rgba(20, 58, 139, 0.671);
+}
+
+[data-theme="dark"] {
     --secondary-color: rgb(30,41,59);
     --gradient-start-color: rgb(13,148,136);
     --gradient-end-color: rgb(52,211,153);
@@ -124,7 +131,12 @@ footer {
 }
 
 
-
+#theme-toggle button{
+    background-color: var(--primary-color);
+    border-radius: 6px;
+    padding: 0.25rem 0.25rem;
+    font-size: 1.5rem;
+}
 #about {
     background: linear-gradient(to right, var(--gradient-start-color), var(--gradient-end-color));
     padding: 2rem 0 2rem 0;
